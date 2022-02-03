@@ -1,6 +1,6 @@
 ###This program creates a window and then assigns each pixel a selected color randomly
 
-import pygame, random,
+import pygame, random, sys
 
 #SETS UP SCREEN
 screen_x = 800
@@ -15,11 +15,14 @@ POWDER_BLUE = (176, 224, 230)
 CYAN = (0, 255, 255)
 LIGHT_YELLOW2= (255, 255, 153)
 
+colors = [BLACK, NAVY, LAVENDER, POWDER_BLUE, CYAN, LIGHT_YELLOW2]
+
 #init pygame
 pygame.display.init
 
 #variables
-box_side = 1
+box_side = 10
+running = True
 
 #asigns each pixel a color randomly
 def random_screen():
@@ -27,20 +30,9 @@ def random_screen():
     c = 1
     screen_size = screen_x * screen_y
     while screen_size > 0:
-        a = random.randint(1,6)
+        a = random.randint(0,5)
         if b < screen_x:
-            if a == 1:
-                pygame.draw.rect(screen, BLACK, pygame.Rect(b,c,box_side,box_side))
-            elif a == 2:
-                pygame.draw.rect(screen, NAVY, pygame.Rect(b,c,box_side,box_side))
-            elif a == 3:
-                pygame.draw.rect(screen, LAVENDER, pygame.Rect(b,c,box_side,box_side))
-            elif a == 4:
-                pygame.draw.rect(screen, POWDER_BLUE, pygame.Rect(b,c,box_side,box_side))
-            elif a == 5:
-                pygame.draw.rect(screen, CYAN, pygame.Rect(b,c,box_side,box_side))
-            elif a == 6:
-                pygame.draw.rect(screen, LIGHT_YELLOW2, pygame.Rect(b,c,box_side,box_side))
+            pygame.draw.rect(screen, colors[a], pygame.Rect(b,c,box_side,box_side))
             screen_size -= 1
             b += box_side
         else:
@@ -50,11 +42,14 @@ def random_screen():
             screen_size -= 1       
 
 #main loop#
-while True:
-    screen
-    random_screen()
-    pygame.display.flip()
-    
-
-
-
+while running == True:
+    for event in pygame.event.get():
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                running = False
+                pygame.quit()
+                sys.exit()
+        else:
+            screen
+            random_screen()
+            pygame.display.flip()
