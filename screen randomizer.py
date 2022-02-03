@@ -1,6 +1,9 @@
 ###This program creates a window and then assigns each pixel a selected color randomly
 
-import pygame, random, sys
+import pygame, random
+
+#init pygame
+pygame.display.init
 
 #SETS UP SCREEN
 screen_x = 800
@@ -8,20 +11,17 @@ screen_y = 800
 screen = pygame.display.set_mode((screen_x, screen_y))
 
 #COLORS RGB
-BLACK = (0,0,0)
-NAVY = (0,0,128)
-LAVENDER = (230,230,250)
-POWDER_BLUE = (176, 224, 230)
-CYAN = (0, 255, 255)
-LIGHT_YELLOW2= (255, 255, 153)
+COLOR_1 = (0,105,10)
+COLOR_2 = (5,155,20)
+COLOR_3 = (10,155,40)
+COLOR_4 = (20,205,80)
+COLOR_5 = (40,205,160)
+COLOR_6 = (80,255,255)
 
-colors = [BLACK, NAVY, LAVENDER, POWDER_BLUE, CYAN, LIGHT_YELLOW2]
-
-#init pygame
-pygame.display.init
+colors = [COLOR_1, COLOR_2, COLOR_3, COLOR_4, COLOR_5, COLOR_6]
 
 #variables
-box_side = 10
+box_side = 25
 running = True
 
 #asigns each pixel a color randomly
@@ -33,12 +33,11 @@ def random_screen():
         a = random.randint(0,5)
         if b < screen_x:
             pygame.draw.rect(screen, colors[a], pygame.Rect(b,c,box_side,box_side))
-            screen_size -= 1
             b += box_side
         else:
             b = 0
             c += box_side
-            screen_size -= 1       
+        screen_size -= 1       
 
 #main loop#
 while running == True:
@@ -47,7 +46,7 @@ while running == True:
             if event.key == pygame.K_SPACE:
                 running = False
                 pygame.quit()
-                sys.exit()
+                quit()
         else:
             screen
             random_screen()
