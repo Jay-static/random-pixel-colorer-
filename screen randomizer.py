@@ -36,7 +36,6 @@ def random_screen():
             screen_size -= 1
             b += box_side
         else:
-
             b = 0
             c += box_side
             screen_size -= 1       
